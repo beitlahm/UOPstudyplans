@@ -1,5 +1,5 @@
 <!doctype html>
-<html data-saved=""><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>CS Study Plan</title><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.42.0/dist/tabler-icons.min.css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.42.0/dist/tabler-icons.min.css"></noscript><style>
+<html data-saved=""><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.42.0/dist/tabler-icons.min.css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.42.0/dist/tabler-icons.min.css"></noscript><style>
 :root{--font-anthropic-sans:"anthropic-sans", ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;--font-anthropic-serif:"anthropic-serif", ui-serif, Georgia, "Times New Roman", serif}
 :root {
   --radius: calc(0.5rem * var(--cds-rem-scale, 1));
@@ -2268,67 +2268,241 @@ body[data-not-sent] > #vis-container ~ #not-sent {
         <path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
       </marker>
     </defs>
-  </svg><div id="vis-container"><h2 class="sr-only">Interactive prerequisite planner for 44 computer science courses plus university requirements, with progress tracking and elective limits.</h2>
+  </svg><div id="vis-container"><h2 class="sr-only">Interactive prerequisite planner with major selection, English and Arabic, light and dark mode, progress tracking and elective limits.</h2>
 <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:0 0 10px">
+  <select id="mj"></select>
   <button id="m2" aria-pressed="false">Track my progress</button>
   <input id="q" type="text" placeholder="Search name or code" style="width:170px">
-  <select id="f"><option value="all">All courses</option><option value="core">Core only</option><option value="el">Electives only</option><option value="uni">University only</option></select>
-  <button id="rs" style="margin-left:auto">Reset</button>
+  <select id="f"><option value="all"></option><option value="core"></option><option value="el"></option><option value="uni"></option></select>
+  <button id="rs" style="margin-inline-start:auto">Reset</button>
 </div>
 <div id="lg" style="display:flex;flex-wrap:wrap;gap:14px;font-size:12px;color:var(--text-secondary);margin:0 0 8px"></div>
 <div id="mx" style="display:none;gap:10px;flex-wrap:wrap;margin:0 0 8px">
-  <div style="background:var(--surface-2);border-radius:var(--radius);padding:8px 12px"><div style="font-size:12px;color:var(--text-secondary)">Core credits</div><div style="font-size:20px;font-weight:500"><span id="v1">0</span> / <span id="vt">0</span></div></div>
-  <div style="background:var(--surface-2);border-radius:var(--radius);padding:8px 12px"><div style="font-size:12px;color:var(--text-secondary)">Major electives</div><div style="font-size:20px;font-weight:500"><span id="v2">0</span> / 3</div></div>
-  <div style="background:var(--surface-2);border-radius:var(--radius);padding:8px 12px"><div style="font-size:12px;color:var(--text-secondary)">University credits</div><div style="font-size:20px;font-weight:500"><span id="v5">0</span> / <span id="vu">0</span></div></div>
-  <div style="background:var(--surface-2);border-radius:var(--radius);padding:8px 12px"><div style="font-size:12px;color:var(--text-secondary)">Courses done</div><div style="font-size:20px;font-weight:500"><span id="v4">0</span> / <span id="vn">0</span></div></div>
-  <div style="background:var(--surface-2);border-radius:var(--radius);padding:8px 12px"><div style="font-size:12px;color:var(--text-secondary)">Available now</div><div style="font-size:20px;font-weight:500"><span id="v3">0</span></div></div>
-  <div style="background:var(--surface-2);border-radius:var(--radius);padding:8px 12px;border:1.5px solid var(--border-accent)"><div style="font-size:12px;color:var(--text-accent);font-weight:500">Total credits</div><div style="font-size:20px;font-weight:600;color:var(--text-accent)"><span id="vtc">0</span> / <span id="vtt">0</span></div></div>
+  <div style="background:var(--surface-2);border-radius:var(--radius);padding:8px 12px"><div id="l0" style="font-size:12px;color:var(--text-secondary)"></div><div style="font-size:20px;font-weight:500" dir="ltr"><span id="v0">0</span> / <span id="vT">0</span></div></div>
+  <div style="background:var(--surface-2);border-radius:var(--radius);padding:8px 12px"><div id="l1" style="font-size:12px;color:var(--text-secondary)"></div><div style="font-size:20px;font-weight:500" dir="ltr"><span id="v1">0</span> / <span id="vt">0</span></div></div>
+  <div style="background:var(--surface-2);border-radius:var(--radius);padding:8px 12px"><div id="l2" style="font-size:12px;color:var(--text-secondary)"></div><div style="font-size:20px;font-weight:500" dir="ltr"><span id="v2">0</span> / 3</div></div>
+  <div style="background:var(--surface-2);border-radius:var(--radius);padding:8px 12px"><div id="l3" style="font-size:12px;color:var(--text-secondary)"></div><div style="font-size:20px;font-weight:500" dir="ltr"><span id="v5">0</span> / <span id="vu">0</span></div></div>
+  <div style="background:var(--surface-2);border-radius:var(--radius);padding:8px 12px"><div id="l4" style="font-size:12px;color:var(--text-secondary)"></div><div style="font-size:20px;font-weight:500" dir="ltr"><span id="v4">0</span> / <span id="vn">0</span></div></div>
+  <div style="background:var(--surface-2);border-radius:var(--radius);padding:8px 12px"><div id="l5" style="font-size:12px;color:var(--text-secondary)"></div><div style="font-size:20px;font-weight:500"><span id="v3">0</span></div></div>
 </div>
 <div id="info" style="font-size:13px;color:var(--text-secondary);min-height:40px;margin:0 0 8px"></div>
-<div style="overflow-x:auto;border:0.5px solid var(--border);border-radius:12px;padding:8px">
-<svg id="g" role="img"><title>Course prerequisite flowchart</title><desc>Major courses grouped into stages with arrows from each prerequisite to the course that needs it, followed by a separate section for university requirements and electives.</desc>
+<div dir="ltr" style="overflow-x:auto;border:0.5px solid var(--border);border-radius:12px;padding:8px">
+<svg id="g" role="img" style="direction:ltr"><title>Course prerequisite flowchart</title><desc>Courses grouped into stages with arrows from each prerequisite to the course that needs it, followed by a separate section for university requirements.</desc>
 <defs><marker id="arrow2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></marker></defs>
+<g id="root"></g>
 </svg>
 </div>
+<div id="fab" style="position:fixed;right:14px;bottom:14px;display:flex;gap:6px;z-index:100">
+  <button id="bl" style="border:none;background:var(--surface-2);color:var(--text-secondary);width:40px;height:40px;border-radius:50%;padding:0;font-size:14px;cursor:pointer;opacity:.8"></button>
+  <button id="bt" style="border:none;background:var(--surface-2);color:var(--text-secondary);width:40px;height:40px;border-radius:50%;padding:0;font-size:17px;cursor:pointer;opacity:.8"></button>
+</div>
 <script>
-const D=[
-["103101","Calculus (1)",3,[]],["103250","Discrete Math (1)",3,["103101"]],["603391","Systems Analysis",3,["601282"]],
-["402201","Comm. Skills (IT)",3,["9400123"]],["605161","Intro to Networking",3,["601105","603102"]],["603460","Professional Ethics",1,["603391"]],
-["601105","IT Fundamentals",2,[]],["601106","IT Fund. Lab",1,[]],["603102","Intro to Web Design",2,["9601099"]],["603103","Web Design Lab",1,["9601099"]],
-["601241","Logic Design",3,["103250","601105"]],["601322","Computation Theory",3,["601222"]],["603392","Software Eng.",3,["601315","603391"]],
-["601343","Comp. Org & Arch.",3,["104107","601241"]],["601400","Field Training",3,["603392"]],["601432","Operating Systems",3,["601326","601343"]],
-["601315","Internet Prog.",3,["601292","603102"]],["601316","Modern Prog. Lang.",3,["601214"]],["605264","Network Security",3,["605161"]],
-["606360","Artificial Intell.",3,["601326"]],["601465","Comp & Net Maint.",3,["601343"]],["601480","Grad. Project (1)",3,["402201","603392"]],
-["601485","Grad. Project (2)",3,["601480"]],["607101","VR / AR Basics",3,[]],["601222","Data Struct & Algo",3,["103250","601112","601113"]],
-["601326","Advanced Algorithms",3,["601222"]],["601437","Distributed & Cloud",3,["601432"]],["601292","Visual Prog & HCI",3,["601214"]],
-["601112","Prog. Language (1)",2,["601105"]],["601113","PL (1) Lab",1,["601105","601106"]],["601214","Prog. Language (2)",2,["601112"]],
-["601215","PL (2) Lab",1,["601112","601113"]],["601282","Database (1)",2,["601222"]],["601283","Database (1) Lab",1,["601222"]],
-["104106","Physics Lab",1,["104107"]],["103231","Statistics",3,["103101"]],["104107","Physics for IT",3,[]],["103241","Linear Algebra (1)",3,["103101"]],
-["103373","Numerical Anal. (1)",3,["103241"]],
-["601314","Multimedia Prog.",3,["601315"],1,"maj"],["601324","PL & Design",3,["601222"],1,"maj"],
-["601471","Computer Graphics",3,["601326"],1,"maj"],["601408","Selected Topics CS",3,["603391"],1,"maj"],["601318","Internet of Things",3,["601315"],1,"maj"],
-["601409","Innovation & Entrep.",3,["603392"],1,"maj"],["601470","Latest in CS",3,["601316"],1,"maj"],["601488","Professional Skills",3,["402201","603391"],1,"maj"],
-["9601099","Computer Skills",null,[],2],["9400123","English Comm. 1",3,[],3],
-["9400100","National Education",3,[],4],["9400109","Military Science",3,[],4],["9400113","Arabic Comm. 1",3,[],4],
-["9300105","Entrep. & Innovation",2,[],4],["9400107","Leadership & Social",2,[],4],["9400108","Life Skills",2,[],4],
-["9400104","Political Science",3,[],5,"u1"],["9700102","Human Rights",3,[],5,"u1"],["9400133","Jerusalem & Palest.",3,[],5,"u1"],
-["9400103","Human Civilization",3,[],5,"u1"],["9400114","Arabic Comm. 2",3,["9400113"],5,"u1"],["9400124","English Comm. 2",3,["9400123"],5,"u1"],
-["9100101","Science & Life",3,[],5,"u2"],["9500101","First Aid",3,[],5,"u2"],["9500111","Food & Nutrition",3,[],5,"u2"],
-["9600104","Digital Skills",3,[],5,"u2"],["9200102","Development & Env.",3,[],5,"u2"],
-["ANY3","Any 3hr course",3,[],5,"u3"]];
-const BLK=[["Compulsory · 18 cr",["9400100","9400109","9400113","9300105","9400107","9400108"]],
-["Elective 1 · pick one",["9400104","9700102","9400133","9400103","9400114","9400124"]],
-["Elective 2 · pick one",["9100101","9500101","9500111","9600104","9200102"]],
-["Elective 3 · any course",["ANY3"]]];
+const mk=(rows,type,cat,grp)=>rows.map(r=>({id:r[0],en:r[1],ar:r[2],cr:r[3],pre:r[4],arFull:r[5]||r[2],hrs:r[6]||0,type,cat,grp:grp||null}));
+const FAC=[
+["103101","Calculus (1)","تفاضل وتكامل (1)",3,[]],
+["103250","Discrete Math (1)","رياضيات متقطعة (1)",3,["103101"]],
+["603391","Systems Analysis","تحليل الأنظمة",3,["601282"],"تحليل الأنظمة وتصميمها"],
+["402201","Comm. Skills (IT)","مهارات الاتصال (IT)",3,["9400123"],"مهارات الاتصال لتكنولوجيا المعلومات"],
+["605161","Intro to Networking","مدخل إلى الشبكات",3,["601105","603102"],"مدخل الى الشبكات وتراسل البيانات"],
+["603460","Professional Ethics","الأخلاقيات المهنية",1,["603391"],"الأخلاقيات المهنية في تكنولوجيا المعلومات"],
+["601105","IT Fundamentals","أساسيات المعلومات",2,[],"أساسيات تكنولوجيا المعلومات"],
+["601106","IT Fund. Lab","مختبر الأساسيات",1,[],"مختبر أساسيات تكنولوجيا المعلومات"],
+["603102","Intro to Web Design","تصميم المواقع",2,["9601099"],"مقدمة لتصميم المواقع الالكترونية"],
+["603103","Web Design Lab","مختبر تصميم المواقع",1,["9601099"],"مختبر مقدمة لتصميم المواقع الالكترونية"]];
+const EXT=[["9601099","Computer Skills","مهارات الحاسوب",null,[]]];
+const UMAIN=[["9400123","English Comm. 1","اتصال بالإنجليزية (1)",3,[],"مهارات الاتصال والتواصل باللغة الانجليزية (1)"]];
+const ULOW=[
+["9400100","National Education","التربية الوطنية",3,[]],
+["9400113","Arabic Comm. 1","اتصال بالعربية (1)",3,[],"مهارات الاتصال والتواصل باللغة العربية (1)"],
+["9300105","Entrep. & Innovation","الريادة والابتكار",2,[]],
+["9400107","Leadership & Social","القيادة والمسؤولية",2,[],"القيادة والمسؤولية المجتمعية"],
+["9400108","Life Skills","المهارات الحياتية",2,[]],
+["9400110","Military Science","العلوم العسكرية",3,[]]];
+const U1=[
+["9700102","Human Rights","حقوق الانسان",3,[]],
+["9400104","Political Science","علوم سياسية",3,[]],
+["9400114","Arabic Comm. 2","اتصال بالعربية (2)",3,["9400113"],"مهارات الاتصال والتواصل باللغة العربية (2)"],
+["9400124","English Comm. 2","اتصال بالإنجليزية (2)",3,["9400123"],"مهارات الاتصال والتواصل باللغة الانجليزية (2)"],
+["9400133","Jerusalem & Palest.","القدس والقضية",3,[],"القدس والقضية الفلسطينية"],
+["9400103","Human Civilization","الحضارة الانسانية",3,[]]];
+const U2=[
+["9500111","Food & Nutrition","الغذاء والتغذية",3,[],"الغذاء والتغذية في حياتنا ( لغير طلبة التغذية )"],
+["9100101","Science & Life","العلم والحياة",3,[]],
+["9500101","First Aid","الإسعافات الأولية",3,[]],
+["9600104","Digital Skills","الثقافة الرقمية",3,[]],
+["9200102","Development & Env.","التنمية والبيئة",3,[]]];
+const U3=[["ANY3","Any 3hr course","مادة حرة (3 ساعات)",3,[],"مادة حرة (أي مادة 3 ساعات)"]];
+const SHARED=[...mk(FAC,0,'fac'),...mk(EXT,2,'fac'),...mk(UMAIN,3,'uni'),...mk(ULOW,4,'uni'),...mk(U1,5,'uni','u1'),...mk(U2,5,'uni','u2'),...mk(U3,5,'uni','u3')];
+const BLK=[ULOW,U1,U2,U3].map(a=>a.map(r=>r[0]));
+const CSCORE=[
+["601343","Comp. Org & Arch.","معمارية الحاسوب",3,["104107","601241"],"تنظيم ومعمارية الحاسوب"],
+["601400","Field Training","تدريب ميداني",3,["603392"]],
+["601241","Logic Design","تصميم المنطق",3,["103250","601105"],"تصميم منطق الحاسوب"],
+["601322","Computation Theory","نظرية الحوسبة",3,["601222"]],
+["603392","Software Eng.","هندسة البرمجيات",3,["601315","603391"]],
+["601432","Operating Systems","نظم التشغيل",3,["601326","601343"]],
+["601315","Internet Prog.","برمجة الإنترنت",3,["601292","603102"]],
+["601480","Grad. Project (1)","مشروع تخرج (1)",3,["402201","603392"]],
+["601485","Grad. Project (2)","مشروع تخرج (2)",3,["601480"]],
+["605264","Network Security","أمن المعلومات",3,["605161"],"أمن المعلومات والشبكات"],
+["606360","Artificial Intell.","الذكاء الاصطناعي",3,["601326"]],
+["601465","Comp & Net Maint.","صيانة الحواسيب",3,["601343"],"صيانة الحواسيب والشبكات"],
+["607101","VR / AR Basics","الواقع الافتراضي",3,[],"أساسيات الواقع الافتراضي والمعزز"],
+["601222","Data Struct & Algo","تراكيب البيانات",3,["103250","601112","601113"],"تراكيب البيانات و الخوارزميات"],
+["601326","Advanced Algorithms","الخوارزميات المتقدمة",3,["601222"]],
+["601437","Distributed & Cloud","النظم الموزعة",3,["601432"],"النظم الموزعة والسحابية"],
+["601292","Visual Prog & HCI","البرمجة المرئية",3,["601214"],"البرمجة المرئية وتفاعل الانسان مع الحاسوب"],
+["601112","Prog. Language (1)","لغة برمجة (1)",2,["601105"]],
+["601113","PL (1) Lab","مختبر لغة برمجة (1)",1,["601105","601106"]],
+["601214","Prog. Language (2)","لغة برمجة (2)",2,["601112"]],
+["601215","PL (2) Lab","مختبر لغة برمجة (2)",1,["601112","601113"]],
+["601282","Database (1)","قواعد البيانات (1)",2,["601222"]],
+["601283","Database (1) Lab","مختبر قواعد البيانات",1,["601222"],"مختبر قواعد البيانات (1)"],
+["601316","Modern Prog. Lang.","لغة برمجة حديثة",3,["601214"]]];
+const CSEL=[
+["601314","Multimedia Prog.","الوسائط المتعددة",3,["601315"],"برمجة الوسائط المتعددة"],
+["601471","Computer Graphics","الرسم بالحاسوب",3,["601326"]],
+["601408","Selected Topics CS","مواضيع مختارة",3,["603391"],"مواضيع مختارة في علم الحاسوب"],
+["601324","PL & Design","تصميم لغات البرمجة",3,["601222"]],
+["601409","Innovation & Entrep.","الإبداع والريادة",3,["603392"],"الابداع والريادة في علم الحاسوب"],
+["601470","Latest in CS","المستجدات في الحاسوب",3,["601316"],"المستجدات في علم الحاسوب"],
+["601318","Internet of Things","إنترنت الأشياء",3,["601315"],"مقدمة في انترنت الأشياء"],
+["601488","Professional Skills","مهارات مهنية",3,["402201","603391"],"مهارات مهنية في علم الحاسوب"]];
+const CSSUP=[
+["104106","Physics Lab","مختبر الفيزياء",1,["104107"],"مختبر فيزياء عامة"],
+["103231","Statistics","مبادئ الإحصاء",3,["103101"],"مبادئ الاحصاء"],
+["104107","Physics for IT","الفيزياء العامة",3,[],"الفيزياء العامة لتكنولوجيا المعلومات"],
+["103241","Linear Algebra (1)","جبر خطي (1)",3,["103101"]],
+["103373","Numerical Anal. (1)","تحليل عددي (1)",3,["103241"]]];
+const DSNEW=[
+["606170","Data Science Fund.","أساسيات علم البيانات",3,[]],
+["606271","Big Data","البيانات الضخمة",3,[]],
+["606272","Statistics for DS","الإحصاء لعلم البيانات",3,[]],
+["606273","Big Data Lab","مختبر البيانات الضخمة",1,[]],
+["606315","Programming for DS","البرمجة لعلم البيانات",3,[]],
+["606361","Machine Learning","تعلم الآلة",3,[]],
+["606362","Deep Learning","التعلم العميق",3,[]],
+["606363","Automated Systems","الأنظمة الآلية",3,[],"الأنظمة الآلية لعلم البيانات والذكاء الاصطناعي"],
+["606364","ML Lab","مختبر تعلم الآلة",1,[]],
+["606365","DL Lab","مختبر التعلم العميق",1,[]],
+["606374","Data Mining & DW","التنقيب في البيانات",3,[],"التنقيب في البيانات ومستودعات البيانات"],
+["606375","Data Eng. & Analysis","هندسة البيانات",3,[],"هندسة البيانات وتحليلها"],
+["606384","Computer Vision","الرؤية الحاسوبية",3,[]],
+["606400","Field Training","تدريب ميداني",3,[]],
+["606417","Robots Prog.","برمجة الروبوتات",3,[]],
+["606464","NLP","معالجة اللغات",3,[],"معالجة اللغات الطبيعية"],
+["606475","Data Explor. & Viz","استكشاف البيانات",3,[],"استكشاف البيانات وتمثيلها المرئي"],
+["606480","Grad. Project (1)","مشروع تخرج (1)",3,[]],
+["606485","Grad. Project (2)","مشروع تخرج (2)",3,[]],
+["606408","Selected Topics DS","مواضيع مختارة",3,[],"مواضيع مختارة في علم البيانات والذكاء الاصطناعي"],
+["606409","Innovation & Entrep.","الإبداع والريادة",3,[],"الابداع والريادة في علم البيانات"],
+["606465","Applications of AI","تطبيقات الذكاء",3,[],"تطبيقات الذكاء الاصطناعي"],
+["606466","Knowledge-Based Sys.","الأنظمة المعرفية",3,[],"الأنظمة المعتمدة على المعرفة"],
+["606467","Expert Systems","النظم الخبيرة",3,[]],
+["606468","Latest in DS","مستجدات علم البيانات",3,[],"المستجدات في علم البيانات"],
+["606476","Pattern Recognition","التعرف على الأنماط",3,[]],
+["606488","Professional Skills","مهارات مهنية",3,[],"مهارات مهنية في علم البيانات والذكاء الاصطناعي"]];
+const ISNEW=[
+["606316","Internet App Prog.","تطبيقات الإنترنت",3,[],"برمجة تطبيقات الإنترنت"],
+["605210","Cybersecurity Fund.","الأمن السيبراني",3,[],"أساسيات الأمن السيبراني"],
+["605250","Linux Security","أمن لينكس",3,[],"أساسيات أمن لينكس"],
+["605262","LAN & WAN","الشبكات المحلية",3,[],"الشبكات المحلية والواسعة"],
+["605336","Ethical Hacking","الاختراق الأخلاقي",2,[]],
+["605337","Ethical Hacking Lab","مختبر الاختراق",1,[],"مختبر الاختراق الأخلاقي"],
+["605343","Cryptography Theory","نظرية التشفير",3,[]],
+["605346","InfoSec Programming","برمجة أمن المعلومات",3,[],"برمجة أمن المعلومات والشبكات"],
+["605349","Data Analytics","تحليلات البيانات",3,[]],
+["605352","Digital Forensics","التحقيق الجنائي",2,[],"التحقيق الجنائي الرقمي"],
+["605353","Forensics Lab","مختبر التحقيق",1,[],"مختبر التحقيق الجنائي الرقمي"],
+["605360","Malware Analysis","البرمجيات الخبيثة",3,[],"تحليل البرمجيات الخبيثة"],
+["605365","Network Monitoring","مراقبة الشبكات",3,[],"مراقبة الشبكات وتوثيقها"],
+["605400","Field Training","تدريب ميداني",3,[]],
+["605460","Vulnerability Assess.","تقييم الثغرات",3,[],"تقييم الثغرات الأمنية"],
+["605462","Secure Software Dev.","تطوير أمن البرمجيات",3,[]],
+["605480","Grad. Project (1)","مشروع تخرج (1)",3,[]],
+["605485","Grad. Project (2)","مشروع تخرج (2)",3,[]],
+["605340","InfoSec Protocols","بروتوكولات الأمن",3,[],"بروتوكولات أمن المعلومات"],
+["605342","Secure Business Arch.","معمارية الأعمال",3,[],"معمارية الأعمال الآمنة"],
+["605347","Risk Management","إدارة مخاطر النظم",3,[],"إدارة مخاطر نظم المعلومات"],
+["605350","Blockchain Tech.","تقنية البلوكتشين",3,[]],
+["605408","Selected Topics","مواضيع مختارة",3,[],"مواضيع مختارة في أمن المعلومات"],
+["605409","Innovation & Entrep.","الإبداع والريادة",3,[],"الابداع والريادة في أمن المعلومات"],
+["605441","Cloud Security","أمن الحوسبة السحابية",3,[]],
+["605442","Database Security","أمن قواعد البيانات",3,[]],
+["605443","Intrusion Det. & Prev.","كشف ومنع التسلل",3,[],"كشف ومنع التسلل"],
+["605446","Biometrics Systems","القياسات الحيوية",3,[],"أنظمة القياسات الحيوية"],
+["605470","Latest in InfoSec","مستجدات الأمن",3,[],"المستجدات في أمن المعلومات"],
+["605477","Secure Wireless Apps","تطبيقات لاسلكية آمنة",3,[],"برمجة التطبيقات اللاسلكية الآمنة"],
+["605488","Professional Skills","مهارات مهنية",3,[],"مهارات مهنية في أمن المعلومات"]];
+const NM={};[...CSCORE,...CSEL,...CSSUP,...DSNEW,...ISNEW].forEach(r=>NM[r[0]]=r);
+const pick=l=>l.map(x=>{const b=NM[x[0]];return [b[0],b[1],b[2],b[3],x[1],b[5],x[2]]});
+const DSCORE=pick([["601112",["601105"]],["601113",["601105","601106"]],["601214",["601112"]],["601215",["601112","601113"]],["601222",["601112","601113","103250"]],["601282",["601222"]],["601283",["601222"]],["601432",["601282","601283"]],
+["606170",["601105"]],["606271",["606272","606170"]],["606272",["103231"]],["606273",["606272","606170"]],["606315",["606271","601214"]],["606360",["606170","601222"]],["606361",["606360"]],["606362",["606361","606364"]],["606363",["606362"]],["606364",["606360"]],["606365",["606361","606364"]],["606374",["606375","606361"]],["606375",["606272","603391"]],["606384",["606361"]],["606400",["606375"]],["606417",["606361"]],["606464",["606362"]],["606475",["606374"]],["606480",["402201","606375"],90],["606485",["606480"]]]);
+const DSEL=pick([["605264",["605161"]],["606408",["603391"]],["606409",["606375"]],["606465",["606362"]],["606466",["606361"]],["606467",["606361"]],["606468",["606375"]],["606476",["606361","103241"]],["606488",["603391","402201"]]]);
+const DSSUP=pick([["103231",["103101"]],["103241",["103101"]]]);
+const ISCORE=pick([["601112",["601105"]],["601113",["601105","601106"]],["601214",["601112"]],["601215",["601112","601113"]],["601222",["601112","601113","103250"]],["601282",["601222"]],["601283",["601222"]],["601432",["601282","601283"]],
+["606316",["601282","601283","603102","603103"]],["603392",["603391"]],["605210",["605161"]],["605250",["605210"]],["605262",["605161"]],["605336",["605250"]],["605337",["605250"]],["605343",["601222","605210"]],["605346",["601222","601214","601215"]],["605349",["605262"]],["605352",["605336","605337"]],["605353",["605336","605337"]],["605360",["605262"]],["605365",["605262"]],["605400",["603392"]],["605460",["605336","605337","605365"]],["605462",["603392","605360"]],["605480",["402201","603392"]],["605485",["605480"]],["606360",["601222"]]]);
+const ISEL=pick([["605340",["605262"]],["605342",["605262"]],["605347",["605336","605337"]],["605350",["605343"]],["605408",["603391"]],["605409",["603392"]],["605441",["605262"]],["605442",["601282","601283","605336","605337"]],["605443",["605336","605337"]],["605446",["605262","606360"]],["605470",["605262"]],["605477",["605262","601222"]],["605488",["402201","603391"]]]);
+const ISSUP=pick([["103231",["103101"]],["103241",["103101"]]]);
+const MAJORS={cs:{en:'Computer Science',ar:'علم الحاسوب',rows:[...mk(CSCORE,0,'major'),...mk(CSEL,1,'major','maj'),...mk(CSSUP,0,'sup')]},
+ds:{en:'Data Science & Artificial Intelligence',ar:'علم البيانات والذكاء الاصطناعي',rows:[...mk(DSCORE,0,'major'),...mk(DSEL,1,'major','maj'),...mk(DSSUP,0,'sup')]},
+is:{en:'Information Security',ar:'أمن المعلومات',ov:{'605161':['601105']},rows:[...mk(ISCORE,0,'major'),...mk(ISEL,1,'major','maj'),...mk(ISSUP,0,'sup')]}};
 const LIM={maj:3,u1:1,u2:1,u3:1};
-const GN={maj:'major electives (3)',u1:'University Elective 1 (1)',u2:'University Elective 2 (1)',u3:'University Elective 3 (1)'};
-const $=id=>document.getElementById(id);
-const N={};D.forEach(d=>{const t=d[4]||0;N[d[0]]={id:d[0],name:d[1],cr:d[2],pre:d[3],ext:t===2,el:t===1||t===5,uni:t>=3,low:t>=4,grp:d[5]||null,suc:[]}});
+const TX={
+en:{track:'Track my progress',search:'Search name or code',f:['All courses','Core only','Electives only','University only'],reset:'Reset',uniTitle:'University requirements',stage:'Stage',cr:'cr',
+blk:['Compulsory · 18 cr','Elective 1 · pick one','Elective 2 · pick one','Elective 3 · any course'],note:['English Comm. 1 (9400123)','is in Stage 1 above'],
+any3:"Any 3hr course, 3 hour course from any faculty you want and it can't be something you've done before",anyDept:'any dept.',
+lg:['University requirement','Major elective','University elective','Selected','Needed before it','Fully unlocked','Partly unlocked','Credits not listed','Done','Available now','Locked or limit reached','Electives are pills'],
+mx:['Total credits','Core credits','Major electives','University credits','Courses done','Available now'],
+hrsNeed:(h,t)=>'Needs '+h+' credit hours (you have '+t+')',done:'Done',avail:'Available now',needs:'Needs: ',also:'Also needs: ',
+limit:(n,g)=>'Limit reached: you already chose '+n+' for '+g,
+GN:{maj:'major electives (3)',u1:'University Elective 1 (1)',u2:'University Elective 2 (1)',u3:'University Elective 3 (1)'},
+trackInfo:'Click a course to mark it done; its prerequisites are marked too. Click a done course to undo it and everything after it. Limits: 3 major electives, 1 from University Elective 1, 1 from University Elective 2, and 1 "Any 3hr course".',
+defInfo:'Click a course to trace its path. Purple pills are major electives, pink pills are university electives. University requirements are in the section below the stages; English Comm. 1 stays in Stage 1 because Comm. Skills (IT) needs it.',
+warn:(g,n,c)=>'Limit reached for '+g+'. Unmark one of: '+n+' to pick '+c+'.',
+sel:(n,id,isEl,a,f,p,fr)=>n+' ('+id+')'+(isEl?', elective':'')+': needs '+a+' course'+(a===1?'':'s')+' first. Fully unlocks '+f+' course'+(f===1?'':'s')+(p?', and '+p+' more only partly.':'.')+(fr.length?' Waiting on other courses: '+fr.map(x=>x[0]+' (also needs '+x[1]+')').join('; ')+'.':''),
+bl:'عربي',blT:'Switch to Arabic',btD:'Switch to light mode',btL:'Switch to dark mode'},
+ar:{track:'تتبّع تقدّمي',search:'ابحث بالاسم أو الرمز',f:['كل المقررات','الإجباري فقط','الاختياري فقط','متطلبات الجامعة فقط'],reset:'إعادة ضبط',uniTitle:'متطلبات الجامعة',stage:'المرحلة',cr:'ساعات',
+blk:['إجباري · 18 ساعة','اختياري 1 · اختر واحدًا','اختياري 2 · اختر واحدًا','اختياري 3 · أي مادة'],note:['اتصال بالإنجليزية (1) (9400123)','في المرحلة 1 أعلاه'],
+any3:'مادة حرة (أي مادة 3 ساعات)، مادة من 3 ساعات من أي كلية تريدها، ولا يمكن أن تكون مادة سبق لك إنجازها',anyDept:'أي كلية',
+lg:['متطلب جامعة','اختياري تخصص','اختياري جامعة','المحدد','مطلوب قبله','يُفتح بالكامل','يُفتح جزئيًا','الساعات غير مذكورة','مُنجَز','متاح الآن','مقفل أو بلغت الحد','الاختياري على شكل حبّة'],
+mx:['إجمالي الساعات','الساعات الإجبارية','اختياري التخصص','ساعات الجامعة','المقررات المنجزة','المتاح الآن'],
+hrsNeed:(h,t)=>'يحتاج '+h+' ساعة معتمدة (لديك '+t+')',done:'مُنجَز',avail:'متاح الآن',needs:'يحتاج: ',also:'يحتاج أيضًا: ',
+limit:(n,g)=>'بلغت الحد: اخترت مسبقًا '+n+' في '+g,
+GN:{maj:'اختياري التخصص (3)',u1:'اختياري الجامعة 1 (واحد)',u2:'اختياري الجامعة 2 (واحد)',u3:'اختياري الجامعة 3 (واحد)'},
+trackInfo:'اضغط على مقرر لتعليمه كمُنجَز، وسيتم تعليم متطلباته أيضًا. اضغط على مقرر منجز للتراجع عنه وعن كل ما بعده. الحدود: 3 اختياري تخصص، وواحد من اختياري الجامعة 1، وواحد من اختياري الجامعة 2، وواحد "مادة حرة 3 ساعات".',
+defInfo:'اضغط على مقرر لتتبع مساره. الحبّات البنفسجية اختياري التخصص والوردية اختياري الجامعة. متطلبات الجامعة في القسم أسفل المراحل، ويبقى اتصال بالإنجليزية (1) في المرحلة 1 لأن مهارات الاتصال (IT) تحتاجه.',
+warn:(g,n,c)=>'بلغت الحد في '+g+'. ألغِ تعليم أحد هذه: '+n+' لاختيار '+c+'.',
+sel:(n,id,isEl,a,f,p,fr)=>{const c=k=>k===0?'0 مقررات':k===1?'مقررًا واحدًا':k===2?'مقررين':k<=10?k+' مقررات':k+' مقررًا';return n+' ('+id+')'+(isEl?'، اختياري':'')+': يحتاج '+c(a)+' قبله. يفتح بالكامل '+c(f)+(p?'، ويفتح '+c(p)+' آخر جزئيًا فقط.':'.')+(fr.length?' بانتظار مقررات أخرى: '+fr.map(x=>x[0]+' (يحتاج أيضًا '+x[1]+')').join('؛ ')+'.':'')},
+bl:'EN',blT:'التبديل إلى الإنجليزية',btD:'الوضع الفاتح',btL:'الوضع الداكن'}};
+let lang='en',majKey='cs',mode='x',sel=null,q='',flt='all',warn='',theme=null;
+const T=()=>TX[lang];const $=id=>document.getElementById(id);
+const done=new Set();
+let N={},edges=[],memo={},coreTot=0,slots=0;const lab=[];
+const root=$('root'),svg=$('g'),NS='http://www.w3.org/2000/svg';
+const W=128,H=40,CS=168,RS=50,TOP=30,M=8;
+function el(t,a,p){const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);(p||root).appendChild(e);return e}
+function reg(e,f){lab.push([e,f]);e.textContent=f()}
+function wrap(s,m){const o=[];let c='';s.split(' ').forEach(w=>{if((c+' '+w).trim().length>m&&c){o.push(c);c=w}else c=(c+' '+w).trim()});if(c)o.push(c);return o}
+function fit(t,max){try{t.removeAttribute('textLength');let fs=12;t.style.fontSize=fs+'px';let l=t.getComputedTextLength();
+while(l>max&&fs>9.5){fs-=0.5;t.style.fontSize=fs+'px';l=t.getComputedTextLength()}
+if(l>max){t.setAttribute('textLength',max);t.setAttribute('lengthAdjust','spacingAndGlyphs')}}catch(e){}}
+const nm=i=>lang==='ar'?N[i].ar:N[i].en;
+const full=n=>n.id==='ANY3'?T().any3:(lang==='ar'?n.arFull:n.en);
+const base=n=>n.ext?'':(n.el?(n.uni?' c-pink':' c-purple'):(n.uni?' c-coral':' c-gray'));
+const gdone=g=>[...done].filter(i=>N[i]&&N[i].grp===g);
+const canPick=n=>!n.grp||done.has(n.id)||gdone(n.grp).length<LIM[n.grp];
+function up(i,s){N[i].pre.forEach(p=>{if(!s.has(p)){s.add(p);up(p,s)}});return s}
+function dn(i,s){N[i].suc.forEach(p=>{if(!s.has(p)){s.add(p);dn(p,s)}});return s}
+function build(){
+while(root.firstChild)root.removeChild(root.firstChild);lab.length=0;edges=[];memo={};
+N={};[...SHARED,...MAJORS[majKey].rows].forEach(r=>{const t=r.type;N[r.id]={id:r.id,en:r.en,ar:r.ar,arFull:r.arFull,cr:r.cr,hrs:r.hrs,pre:r.pre.slice(),ext:t===2,el:t===1||t===5,uni:t>=3,low:t>=4,grp:r.grp,suc:[]}});
+const ov=MAJORS[majKey].ov||{};Object.keys(ov).forEach(k=>{if(N[k])N[k].pre=ov[k].slice()});
+Object.values(N).forEach(n=>{n.pre=n.pre.filter(p=>N[p])});
 Object.values(N).forEach(n=>n.pre.forEach(p=>N[p].suc.push(n.id)));
 Object.values(N).forEach(n=>n.sm=n.suc.filter(i=>!N[i].low));
-const base=n=>n.ext?'':(n.el?(n.uni?' c-pink':' c-purple'):(n.uni?' c-coral':' c-gray'));
 const MAIN=Object.values(N).filter(n=>!n.low).map(n=>n.id);
-const memo={};function lv(i){if(memo[i]!==undefined)return memo[i];const p=N[i].pre;return memo[i]=p.length?1+Math.max(...p.map(lv)):0}
+const lv=i=>{if(memo[i]!==undefined)return memo[i];const p=N[i].pre;return memo[i]=p.length?1+Math.max(...p.map(lv)):0};
 MAIN.forEach(lv);
 const L=Math.max(...Object.values(memo))+1;const cols=Array.from({length:L},()=>[]);
 MAIN.slice().sort().forEach(i=>cols[memo[i]].push(i));
@@ -2336,92 +2510,91 @@ const pos={};const idx=()=>cols.forEach(c=>c.forEach((i,k)=>pos[i]=k));idx();
 const mean=(a,def)=>a.length?a.reduce((s,i)=>s+pos[i],0)/a.length:def;
 for(let r=0;r<4;r++){for(let l=1;l<L;l++){cols[l].sort((a,b)=>mean(N[a].pre,pos[a])-mean(N[b].pre,pos[b]));idx()}
 for(let l=L-2;l>=0;l--){cols[l].sort((a,b)=>mean(N[a].sm,pos[a])-mean(N[b].sm,pos[b]));idx()}}
-const W=128,H=40,CS=168,RS=50,TOP=30,M=8;const maxR=Math.max(...cols.map(c=>c.length));
-const yDiv=TOP+maxR*RS+14,y0=yDiv+62;const lowRows=Math.max(...BLK.map(b=>b[1].length));
-const svg=$('g');const NS='http://www.w3.org/2000/svg';
-const TW=Math.max(L,BLK.length)*CS,TH=y0+lowRows*RS+34;svg.setAttribute('viewBox','0 0 '+TW+' '+TH);svg.setAttribute('width',TW);svg.setAttribute('height',TH);
-function el(t,a,p){const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);(p||svg).appendChild(e);return e}
-cols.forEach((c,l)=>{const x=M+l*CS;const t=el('text',{x:x+W/2,y:16,'text-anchor':'middle',class:'ts'});t.textContent='Stage '+(l+1);
+const maxR=Math.max(...cols.map(c=>c.length));
+const yDiv=TOP+maxR*RS+14,y0=yDiv+62;const lowRows=Math.max(...BLK.map(b=>b.length));
+const TW=Math.max(L,BLK.length)*CS,TH=y0+lowRows*RS+40;svg.setAttribute('viewBox','0 0 '+TW+' '+TH);svg.setAttribute('width',TW);svg.setAttribute('height',TH);
+cols.forEach((c,l)=>{const x=M+l*CS;reg(el('text',{x:x+W/2,y:16,'text-anchor':'middle',class:'ts'}),()=>T().stage+' '+(l+1));
 const off=Math.floor((maxR-c.length)/2)*RS;c.forEach((i,k)=>{N[i].x=x;N[i].y=TOP+off+k*RS})});
 const ln=el('line',{x1:M,x2:TW-M,y1:yDiv,y2:yDiv,'stroke-width':0.5});ln.style.stroke='var(--border-strong)';
-const tt=el('text',{x:M,y:yDiv+24,class:'th'});tt.textContent='University requirements';
-BLK.forEach((b,c)=>{const x=M+c*CS;const t=el('text',{x:x+W/2,y:y0-14,'text-anchor':'middle',class:'ts'});t.textContent=b[0];
-b[1].forEach((i,k)=>{N[i].x=x;N[i].y=y0+k*RS})});
-[['English Comm. 1 (9400123)',0],['is in Stage 1 above',1]].forEach(a=>{const t=el('text',{x:M+W/2,y:y0+6*RS+4+a[1]*14,'text-anchor':'middle',class:'ts'});t.textContent=a[0];t.style.fontSize='11px'});
-function cub(a,b){const x1=a.x+W,y1=a.y+H/2,x2=b.x,y2=b.y+H/2;const dx=Math.max(30,(x2-x1)/2);return 'M'+x1+' '+y1+'C'+(x1+dx)+' '+y1+','+(x2-dx)+' '+y2+','+(x2-2)+' '+y2}
-function route(a,b,k){const x1=a.x+W,y1=a.y+H/2,x2=b.x,y2=b.y+H/2;
+reg(el('text',{x:M,y:yDiv+24,class:'th'}),()=>T().uniTitle);
+BLK.forEach((b,c)=>{const x=M+c*CS;reg(el('text',{x:x+W/2,y:y0-14,'text-anchor':'middle',class:'ts'}),()=>T().blk[c]);b.forEach((i,k)=>{N[i].x=x;N[i].y=y0+k*RS})});
+[0,1].forEach(a=>{const t=el('text',{x:M+W/2,y:y0+6*RS+4+a*14,'text-anchor':'middle',class:'ts'});t.style.fontSize='11px';reg(t,()=>T().note[a])});
+[0,1,2,3,4].forEach(a=>{const t=el('text',{x:M+3*CS+W/2,y:y0+H+16+a*14,'text-anchor':'middle',class:'ts'});t.style.fontSize='11px';reg(t,()=>wrap(T().any3,28)[a]||'')});
+const cub=(a,b)=>{const x1=a.x+W,y1=a.y+H/2,x2=b.x,y2=b.y+H/2;const dx=Math.max(30,(x2-x1)/2);return 'M'+x1+' '+y1+'C'+(x1+dx)+' '+y1+','+(x2-dx)+' '+y2+','+(x2-2)+' '+y2};
+const route=(a,b,k)=>{const x1=a.x+W,y1=a.y+H/2,x2=b.x,y2=b.y+H/2;
 if(a.low&&b.low)return cub(a,b);
 if(b.low){const xv=x1+20;return 'M'+x1+' '+y1+'C'+(x1+10)+' '+y1+','+xv+' '+y1+','+xv+' '+(y1+10)+'L'+xv+' '+(y2-10)+'C'+xv+' '+y2+','+(xv+4)+' '+y2+','+(x2-2)+' '+y2}
 if(memo[b.id]-memo[a.id]<=1)return cub(a,b);
 const yc=(y1<y2?b.y-5:(y1>y2?b.y+H+5:b.y-5))+[-3,0,3][k%3];
-return 'M'+x1+' '+y1+'C'+(x1+20)+' '+y1+','+(x1+20)+' '+yc+','+(x1+40)+' '+yc+'L'+(x2-40)+' '+yc+'C'+(x2-20)+' '+yc+','+(x2-20)+' '+y2+','+(x2-2)+' '+y2}
-const edges=[];let ek=0;Object.values(N).forEach(n=>n.pre.forEach(p=>{const a=N[p];
-const e=el('path',{d:route(a,n,ek++),fill:'none','marker-end':'url(#arrow2)'});edges.push({e,a:p,b:n.id})}));
+return 'M'+x1+' '+y1+'C'+(x1+20)+' '+y1+','+(x1+20)+' '+yc+','+(x1+40)+' '+yc+'L'+(x2-40)+' '+yc+'C'+(x2-20)+' '+yc+','+(x2-20)+' '+y2+','+(x2-2)+' '+y2};
+let ek=0;Object.values(N).forEach(n=>n.pre.forEach(p=>{const e=el('path',{d:route(N[p],n,ek++),fill:'none','marker-end':'url(#arrow2)'});edges.push({e,a:p,b:n.id})}));
 Object.values(N).forEach(n=>{const g=el('g',{class:'node'});n.g=g;
-const r=el('rect',{x:n.x,y:n.y,width:W,height:H,rx:n.el?20:6,'stroke-width':0.5},g);n.r=r;
-const t1=el('text',{class:'th',x:n.x+W/2,y:n.y+14,'text-anchor':'middle','dominant-baseline':'central'},g);t1.style.fontSize='12px';t1.textContent=n.name;
-const t2=el('text',{class:'ts',x:n.x+W/2,y:n.y+29,'text-anchor':'middle','dominant-baseline':'central'},g);t2.style.fontSize='11px';
-t2.textContent=(n.id==='ANY3'?'any dept.':n.id)+(n.cr?' · '+n.cr+' cr':'');
-n.tip=el('title',{},g);
-g.addEventListener('click',ev=>{ev.stopPropagation();click(n.id)})});
-function up(i,s){N[i].pre.forEach(p=>{if(!s.has(p)){s.add(p);up(p,s)}});return s}
-function dn(i,s){N[i].suc.forEach(p=>{if(!s.has(p)){s.add(p);dn(p,s)}});return s}
-const nm=i=>N[i].name;
-let mode='x',sel=null,q='',flt='all',warn='';const done=new Set();
-const real=Object.values(N).filter(n=>!n.ext);
-const coreTot=real.filter(n=>!n.el&&!n.uni).reduce((s,n)=>s+n.cr,0);
-const uniComp=real.filter(n=>n.uni&&!n.el);const uniTot=uniComp.reduce((s,n)=>s+n.cr,0)+9;
-const slots=real.filter(n=>!n.el&&!n.uni).length+LIM.maj+uniComp.length+3;
-const totalPossible=coreTot+uniTot+LIM.maj*3;
-$('vt').textContent=coreTot;$('vu').textContent=uniTot;$('vn').textContent=slots;$('vtt').textContent=totalPossible;
-const gdone=g=>[...done].filter(i=>N[i].grp===g);
-const canPick=n=>!n.grp||done.has(n.id)||gdone(n.grp).length<LIM[n.grp];
-function sums(){let c=0,u=0,k=0,m=0;done.forEach(i=>{const n=N[i];if(n.ext)return;k++;if(n.uni)u+=n.cr;else if(n.grp==='maj')m++;else if(!n.el)c+=n.cr});return{c,u,k,m}}
-function avail(n){return !n.ext&&!done.has(n.id)&&n.pre.every(p=>done.has(p))&&canPick(n)}
+n.r=el('rect',{x:n.x,y:n.y,width:W,height:H,rx:n.el?20:6,'stroke-width':0.5},g);
+n.t1=el('text',{class:'th',x:n.x+W/2,y:n.y+14,'text-anchor':'middle','dominant-baseline':'central'},g);
+n.t2=el('text',{class:'ts',x:n.x+W/2,y:n.y+29,'text-anchor':'middle','dominant-baseline':'central'},g);n.t2.style.fontSize='11px';
+n.tip=el('title',{},g);g.addEventListener('click',ev=>{ev.stopPropagation();click(n.id)})});
+const real=Object.values(N).filter(n=>!n.ext);const uc=real.filter(n=>n.uni&&!n.el);
+coreTot=real.filter(n=>!n.el&&!n.uni).reduce((s,n)=>s+n.cr,0);slots=real.filter(n=>!n.el&&!n.uni).length+LIM.maj+uc.length+3;
+const uniT=uc.reduce((s,n)=>s+n.cr,0)+9;$('vt').textContent=coreTot;$('vu').textContent=uniT;$('vn').textContent=slots;$('vT').textContent=coreTot+9+uniT;
+refresh();render()}
+function refresh(){lab.forEach(x=>{x[0].textContent=x[1]()});
+Object.values(N).forEach(n=>{n.t1.textContent=nm(n.id);n.t2.textContent=(n.id==='ANY3'?T().anyDept:n.id)+(n.cr?' · '+n.cr+' '+T().cr:'');fit(n.t1,W-14)})}
+function sums(){let c=0,u=0,k=0,m=0,t=0;done.forEach(i=>{const n=N[i];if(!n||n.ext)return;k++;t+=n.cr;if(n.uni)u+=n.cr;else if(n.grp==='maj')m++;else if(!n.el)c+=n.cr});return{c,u,k,m,t}}
+const avail=(n,t)=>!n.ext&&!done.has(n.id)&&n.pre.every(p=>done.has(p))&&canPick(n)&&t>=n.hrs;
 function click(id){const n=N[id];warn='';
 if(mode==='x'){sel=id}else{if(done.has(id)){[id,...dn(id,new Set())].forEach(i=>done.delete(i))}
-else if(!canPick(n)){warn='Limit reached for '+GN[n.grp]+'. Unmark one of: '+gdone(n.grp).map(nm).join(', ')+' to pick '+n.name+'.'}
+else if(!canPick(n)){warn=T().warn(T().GN[n.grp],gdone(n.grp).map(nm).join(', '),nm(id))}
 else{[id,...up(id,new Set())].forEach(i=>done.add(i))}}render()}
 const sw=(bg,bd,r,d)=>'<span style="display:inline-block;width:14px;height:12px;border-radius:'+r+'px;background:'+bg+';border:1.5px '+(d?'dashed':'solid')+' '+bd+'"></span>';
-function legend(){const it=mode==='x'?[[sw('#D85A30','#D85A30',3),'University requirement'],[sw('#AFA9EC','#AFA9EC',7),'Major elective'],[sw('#ED93B1','#ED93B1',7),'University elective'],[sw('#EF9F27','#EF9F27',3),'Selected'],[sw('#378ADD','#378ADD',3),'Needed before it'],[sw('#1D9E75','#1D9E75',3),'Fully unlocked'],[sw('rgba(29,158,117,.2)','#1D9E75',3,1),'Partly unlocked'],[sw('transparent','var(--text-muted)',3,1),'Credits not listed']]:
-[[sw('#639922','#639922',3),'Done'],[sw('#378ADD','#378ADD',3),'Available now'],[sw('var(--surface-1)','var(--border-strong)',3),'Locked or limit reached'],[sw('#AFA9EC','#AFA9EC',7),'Electives are pills']];
+function legend(){const l=T().lg;const it=mode==='x'?[[sw('#D85A30','#D85A30',3),l[0]],[sw('#AFA9EC','#AFA9EC',7),l[1]],[sw('#ED93B1','#ED93B1',7),l[2]],[sw('#EF9F27','#EF9F27',3),l[3]],[sw('#378ADD','#378ADD',3),l[4]],[sw('#1D9E75','#1D9E75',3),l[5]],[sw('rgba(29,158,117,.2)','#1D9E75',3,1),l[6]],[sw('transparent','var(--text-muted)',3,1),l[7]]]:
+[[sw('#639922','#639922',3),l[8]],[sw('#378ADD','#378ADD',3),l[9]],[sw('var(--surface-1)','var(--border-strong)',3),l[10]],[sw('#AFA9EC','#AFA9EC',7),l[11]]];
 $('lg').innerHTML=it.map(x=>'<span style="display:inline-flex;align-items:center;gap:6px">'+x[0]+x[1]+'</span>').join('')}
-function render(){const qq=q.toLowerCase();let A=null,B=null,full=null,dd=null;const S=sums();
-if(mode==='x'&&sel){A=up(sel,new Set());B=dn(sel,new Set());dd=new Set([sel,...A]);full=new Set();let ch=true;
-while(ch){ch=false;B.forEach(i=>{if(!full.has(i)&&N[i].pre.every(p=>dd.has(p))){full.add(i);dd.add(i);ch=true}})}}
+function render(){const qq=q.toLowerCase();let A=null,B=null,fu=null,dd=null;const S=sums();const t=T();
+if(mode==='x'&&sel&&N[sel]){A=up(sel,new Set());B=dn(sel,new Set());dd=new Set([sel,...A]);fu=new Set();let ch=true;
+while(ch){ch=false;B.forEach(i=>{if(!fu.has(i)&&N[i].pre.every(p=>dd.has(p))){fu.add(i);dd.add(i);ch=true}})}}
 const miss=i=>N[i].pre.filter(p=>!dd.has(p));const fo={};let av=0;
-Object.values(N).forEach(n=>{let c=base(n),o=1,dash=n.ext,sw2=0.5,tip='';
-if(A){if(n.id===sel){c=' c-amber'}else if(A.has(n.id)){c=' c-blue'}else if(full.has(n.id)){c=' c-teal'}
-else if(B.has(n.id)){c=' c-teal';o=0.6;dash=true;sw2=1.5;tip='Also needs: '+miss(n.id).map(nm).join(', ')}else{c=' c-gray';o=0.3}}
-else if(mode==='t'){if(done.has(n.id)){c=' c-green';tip='Done'}
-else if(!canPick(n)){o=0.35;tip='Limit reached: you already chose '+gdone(n.grp).map(nm).join(', ')+' for '+GN[n.grp]}
-else if(avail(n)){c=' c-blue';tip='Available now';av++}
-else{o=0.55;if(!n.ext)tip='Needs: '+n.pre.filter(p=>!done.has(p)).map(nm).join(', ')}}
+Object.values(N).forEach(n=>{let c=base(n),o=1,dash=n.ext,sw2=0.5,st='';
+if(A){if(n.id===sel){c=' c-amber'}else if(A.has(n.id)){c=' c-blue'}else if(fu.has(n.id)){c=' c-teal'}
+else if(B.has(n.id)){c=' c-teal';o=0.6;dash=true;sw2=1.5;st=t.also+miss(n.id).map(nm).join(', ')}else{c=' c-gray';o=0.3}}
+else if(mode==='t'){if(done.has(n.id)){c=' c-green';st=t.done}
+else if(!canPick(n)){o=0.35;st=t.limit(gdone(n.grp).map(nm).join(', '),t.GN[n.grp])}
+else if(avail(n,S.t)){c=' c-blue';st=t.avail;av++}
+else{o=0.55;if(!n.ext){const m=n.pre.filter(p=>!done.has(p)).map(nm);st=(m.length?t.needs+m.join(', '):'')+(S.t<n.hrs?(m.length?'. ':'')+t.hrsNeed(n.hrs,S.t):'')}}}
 let f2=1;if(flt==='core'&&n.el)f2=0.2;if(flt==='el'&&!n.el&&!n.ext)f2=0.2;if(flt==='uni'&&!n.uni)f2=0.2;
-if(qq&&!(n.name.toLowerCase().includes(qq)||n.id.toLowerCase().includes(qq)))f2*=0.25;fo[n.id]=f2;
-n.g.setAttribute('class','node'+c);n.g.style.opacity=o*f2;n.tip.textContent=tip;
+if(qq&&!(n.en.toLowerCase().includes(qq)||n.ar.includes(q)||n.id.toLowerCase().includes(qq)))f2*=0.25;fo[n.id]=f2;
+n.g.setAttribute('class','node'+c);n.g.style.opacity=o*f2;n.tip.textContent=full(n)+' ('+n.id+')'+(st?'\n'+st:'');
 if(n.ext&&c===''){n.r.style.fill='none';n.r.style.stroke='var(--text-muted)'}else{n.r.style.fill='';n.r.style.stroke=''}
 if(dash)n.r.setAttribute('stroke-dasharray','4 3');else n.r.removeAttribute('stroke-dasharray');n.r.setAttribute('stroke-width',sw2)});
 edges.forEach(o=>{let col=null,dsh='',w=0.8,op=0.6;
-if(A){if(o.b===sel||A.has(o.b))col='#378ADD';else if((o.a===sel||B.has(o.a))&&B.has(o.b)){col='#1D9E75';if(!full.has(o.b))dsh='4 3'}
+if(A){if(o.b===sel||A.has(o.b))col='#378ADD';else if((o.a===sel||B.has(o.a))&&B.has(o.b)){col='#1D9E75';if(!fu.has(o.b))dsh='4 3'}
 if(col){w=1.6;op=1}else op=0.15}
 else if(mode==='t'){if(done.has(o.a)&&done.has(o.b)){col='#639922';w=1.4;op=1}else if(done.has(o.a)){col='#378ADD';w=1.4;op=0.9}}
 op*=Math.min(fo[o.a],fo[o.b]);
 o.e.style.stroke=col||'var(--border-strong)';o.e.style.strokeWidth=w;o.e.style.opacity=op;o.e.style.strokeDasharray=dsh});
 const d=$('info');
-if(mode==='t'){$('v1').textContent=S.c;$('v2').textContent=S.m;$('v3').textContent=av;$('v4').textContent=S.k;$('v5').textContent=S.u;const earned=S.c+S.u+S.m*3;$('vtc').textContent=earned;
-d.textContent=warn||'Click a course to mark it done; its prerequisites are marked too. Click a done course to undo it and everything after it. Limits: 3 major electives, 1 from University Elective 1, 1 from University Elective 2, and 1 "Any 3hr course".'}
-else if(sel){const n=N[sel];const part=[...B].filter(i=>!full.has(i));const front=part.filter(i=>N[i].pre.some(p=>dd.has(p)));
-let t=n.name+' ('+sel+')'+(n.el?', elective':'')+': needs '+A.size+' course'+(A.size===1?'':'s')+' first. Fully unlocks '+full.size+' course'+(full.size===1?'':'s')+(part.length?', and '+part.length+' more only partly.':'.');
-if(front.length)t+=' Waiting on other courses: '+front.map(i=>nm(i)+' (also needs '+miss(i).map(nm).join(', ')+')').join('; ')+'.';d.textContent=t}
-else d.textContent='Click a course to trace its path. Purple pills are major electives, pink pills are university electives. University requirements are in the section below the stages; English Comm. 1 stays in Stage 1 because Comm. Skills (IT) needs it.'}
+if(mode==='t'){$('v0').textContent=S.t;$('v1').textContent=S.c;$('v2').textContent=S.m;$('v3').textContent=av;$('v4').textContent=S.k;$('v5').textContent=S.u;d.textContent=warn||t.trackInfo}
+else if(A){const n=N[sel];const part=[...B].filter(i=>!fu.has(i));const front=part.filter(i=>N[i].pre.some(p=>dd.has(p)));
+d.textContent=t.sel(nm(sel),sel,n.el,A.size,fu.size,part.length,front.map(i=>[nm(i),miss(i).map(nm).join(', ')]))}
+else d.textContent=t.defInfo}
+function ui(){const t=T();document.documentElement.lang=lang;$('vis-container').setAttribute('dir',lang==='ar'?'rtl':'ltr');
+$('m2').textContent=t.track;$('q').placeholder=t.search;t.f.forEach((s,i)=>{$('f').options[i].textContent=s});$('rs').textContent=t.reset;
+t.mx.forEach((s,i)=>{$('l'+i).textContent=s});
+const sl=$('mj');const cur=majKey;sl.innerHTML='';Object.keys(MAJORS).forEach(k=>{const o=document.createElement('option');o.value=k;o.textContent=MAJORS[k][lang];sl.appendChild(o)});sl.value=cur;
+$('bl').textContent=t.bl;$('bl').title=t.blT;legend();themeUi()}
+function eff(){return theme||(window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}
+function themeUi(){const r=document.documentElement;if(theme){r.setAttribute('data-mode',theme);r.style.colorScheme=theme}else{r.removeAttribute('data-mode');r.style.colorScheme=''}
+const e=eff();$('bt').textContent=e==='dark'?'☀':'☾';$('bt').title=e==='dark'?T().btD:T().btL}
 function setMode(m){mode=m;sel=null;warn='';$('m2').style.background=m==='t'?'var(--surface-2)':'transparent';$('m2').style.fontWeight=m==='t'?500:400;$('m2').setAttribute('aria-pressed',m==='t');
 $('mx').style.display=m==='t'?'flex':'none';legend();render()}
 $('m2').addEventListener('click',()=>setMode(mode==='t'?'x':'t'));
 $('q').addEventListener('input',e=>{q=e.target.value.trim();render()});$('f').addEventListener('change',e=>{flt=e.target.value;render()});
+$('mj').addEventListener('change',e=>{majKey=e.target.value;sel=null;warn='';build()});
 $('rs').addEventListener('click',()=>{sel=null;warn='';done.clear();q='';$('q').value='';flt='all';$('f').value='all';render()});
+$('bl').addEventListener('click',()=>{lang=lang==='en'?'ar':'en';ui();refresh();render()});
+$('bt').addEventListener('click',()=>{theme=eff()==='dark'?'light':'dark';themeUi()});
+['bl','bt'].forEach(i=>{$(i).addEventListener('mouseenter',()=>{$(i).style.opacity=1});$(i).addEventListener('mouseleave',()=>{$(i).style.opacity=.8})});
+if(window.matchMedia)matchMedia('(prefers-color-scheme: dark)').addEventListener('change',themeUi);
 svg.addEventListener('click',()=>{sel=null;render()});
-setMode('x');
+ui();build();setMode('x');
 </script></div>
 </body></html>
-
