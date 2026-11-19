@@ -141,7 +141,7 @@ footer {color:var(--muted);font-size:.8rem;margin-top:9px}.skip,.sr-only {positi
   </main>
 </div>
 <script>
-const mk=(rows,type,cat,grp)=>rows.map(r=>({id:r[0],en:r[1],ar:r[2],cr:r[3],pre:r[4],arFull:r[5]||r[2],hrs:r[6]||0,type,cat,grp:grp||null}));
+const mk=(rows,type,cat,grp)=>rows.map(r=>({id:r[0],en:r[1],enFull:r[7]||r[1],ar:r[2],cr:r[3],pre:r[4],arFull:r[5]||r[2],hrs:r[6]||0,type,cat,grp:grp||null}));
 const FAC=[
 ["103101","Calculus (1)","تفاضل وتكامل (1)",3,[]],
 ["103250","Discrete Math (1)","رياضيات متقطعة (1)",3,["103101"]],
@@ -304,8 +304,8 @@ const SENEW=[
 ["603496","SE CASE Tools","أدوات CASE",3,[],"أدوات هندسة البرمجيات (CASE)"]];
 const VRNEW=[
 ["607211","VR Prog. Language","لغة الواقع الافتراضي",3,[],"لغة البرمجة للواقع الافتراضي"],
-["607212","Intro to UX Design","تجربة المستخدم",3,[],"مقدمة في تصميم تجربة المستخدم"],
-["607292","3D Modeling","نمذجة ثلاثية الأبعاد",3,[]],
+["607392","Intro to UX Design","تجربة المستخدم",3,[],"مقدمة في تصميم تجربة المستخدم",0,"Introduction to User Experience Design"],
+["607232","3D Modeling","نمذجة ثلاثية الأبعاد",3,[]],
 ["607233","2D & 3D Animation","الرسوم المتحركة",3,[],"الرسوم المتحركة ثنائية وثلاثية الأبعاد"],
 ["607353","VR/AR Dev. & Design","تطوير الواقع الافتراضي",3,[],"تطوير وتصميم الواقع الافتراضي والمعزز"],
 ["607400","Field Training","تدريب ميداني",3,[]],
@@ -325,9 +325,8 @@ const VRNEW=[
 ["607488","Professional Skills","مهارات مهنية",3,[],"مهارات مهنية في الواقع الافتراضي والمعزز"],
 ["104121","Physics for VR","فيزياء الواقع",3,[],"فيزياء للواقع الافتراضي"],
 ["203142","Graphic Design Apps","تطبيقات التصميم",3,[],"تطبيقات الحاسوب في التصميم الجرافيكي"]];
-const VREXT=[["607392","Prerequisite 607392","مقرر سابق 607392",null,[]]];
 const NM={};[...CSCORE,...CSEL,...CSSUP,...DSNEW,...ISNEW,...SENEW,...VRNEW].forEach(r=>NM[r[0]]=r);
-const pick=l=>l.map(x=>{const b=NM[x[0]];return [b[0],b[1],b[2],b[3],x[1],b[5],x[2]]});
+const pick=l=>l.map(x=>{const b=NM[x[0]];return [b[0],b[1],b[2],b[3],x[1],b[5],x[2],b[7]]});
 const DSCORE=pick([["601112",["601105"]],["601113",["601105","601106"]],["601214",["601112"]],["601215",["601112","601113"]],["601222",["601112","601113","103250"]],["601282",["601222"]],["601283",["601222"]],["601432",["601282","601283"]],
 ["606170",["601105"]],["606271",["606272","606170"]],["606272",["103231"]],["606273",["606272","606170"]],["606315",["606271","601214"]],["606360",["606170","601222"]],["606361",["606360"]],["606362",["606361","606364"]],["606363",["606362"]],["606364",["606360"]],["606365",["606361","606364"]],["606374",["606375","606361"]],["606375",["606272","603391"]],["606384",["606361"]],["606400",["606375"]],["606417",["606361"]],["606464",["606362"]],["606475",["606374"]],["606480",["402201","606375"],90],["606485",["606480"]]]);
 const DSEL=pick([["605264",["605161"]],["606408",["603391"]],["606409",["606375"]],["606465",["606362"]],["606466",["606361"]],["606467",["606361"]],["606468",["606375"]],["606476",["606361","103241"]],["606488",["603391","402201"]]]);
@@ -341,14 +340,14 @@ const SECORE=pick([["601112",["601105"]],["601113",["601105","601106"]],["601214
 const SEEL=pick([["601316",["103231","601222"]],["603311",["603316"]],["603408",["603391"]],["603409",["603392"]],["603410",["603391"]],["603470",["603316"]],["603488",["402201","603391"]],["603491",["603392"]],["603496",["603404"]],["605347",["605264","603391"]],["606360",["601222"]]]);
 const SESUP=pick([["103231",["103101"]],["103373",["103250"]]]);
 const VRCORE=pick([["601282",["601222"]],["601283",["601222"]],["601241",["601105","103250"]],["601315",["601292","603102"]],["601112",["601105"]],["601113",["601105","601106"]],["601214",["601112"]],["601215",["601112","601113"]],["601292",["607211","203142"]],["601343",["601241","605161"]],["601432",["607353","601343"]],["601222",["601112","601113","103250"]],["601326",["601222","402201"]],["601437",["601432"]],
-["607101",["601112"]],["607211",["601112"]],["607212",["601292","601222"]],["607292",["603102","203142"]],["607233",["607292","104121"]],["607353",["607233","607211"]],["607400",["607353"]],["607461",["607353"]],["607480",["603391","607353"]],["607485",["607480"]]]);
+["607101",["601112"]],["607211",["601112"]],["607392",["601292","601222"]],["607232",["603102","203142"]],["607233",["607232","104121"]],["607353",["607233","607211"]],["607400",["607353"]],["607461",["607353"]],["607480",["603391","607353"]],["607485",["607480"]]]);
 const VREL=pick([["607425",["607353"]],["607351",["607211","607233"]],["607471",["104121","607233"]],["607409",["607353"]],["607408",["607353"]],["607455",["607353"]],["607454",["607353"]],["607470",["607233"]],["607452",["601432","601326"]],["607495",["607392"]],["607488",["402201","603391"]]]);
 const VRSUP=pick([["103231",["103101"]],["103241",["103101"]],["104121",["607101"]],["203142",["607101"]]]);
 const MAJORS={cs:{en:'Computer Science',ar:'علم الحاسوب',rows:[...mk(CSCORE,0,'major'),...mk(CSEL,1,'major','maj'),...mk(CSSUP,0,'sup')]},
 ds:{en:'Data Science & Artificial Intelligence',ar:'علم البيانات والذكاء الاصطناعي',rows:[...mk(DSCORE,0,'major'),...mk(DSEL,1,'major','maj'),...mk(DSSUP,0,'sup')]},
 is:{en:'Information Security',ar:'أمن المعلومات',ov:{'605161':['601105']},rows:[...mk(ISCORE,0,'major'),...mk(ISEL,1,'major','maj'),...mk(ISSUP,0,'sup')]},
 se:{en:'Software Engineering',ar:'هندسة البرمجيات',rows:[...mk(SECORE,0,'major'),...mk(SEEL,1,'major','maj'),...mk(SESUP,0,'sup')]},
-vr:{en:'Computer Science / VR & AR',ar:'علم الحاسوب / الواقع الافتراضي والمعزز',rows:[...mk(VREXT,2,'fac'),...mk(VRCORE,0,'major'),...mk(VREL,1,'major','maj'),...mk(VRSUP,0,'sup')]}};
+vr:{en:'Computer Science / VR & AR',ar:'علم الحاسوب / الواقع الافتراضي والمعزز',rows:[...mk(VRCORE,0,'major'),...mk(VREL,1,'major','maj'),...mk(VRSUP,0,'sup')]}};
 const LIM={maj:3,u1:1,u2:1,u3:1};
 const TX={
 en:{track:'Track my progress',search:'Search name or code',f:['All courses','Core only','Electives only','University only'],reset:'Reset',uniTitle:'University requirements',stage:'Stage',cr:'cr',
@@ -390,7 +389,7 @@ function fit(t,max){try{t.removeAttribute('textLength');let fs=12;t.style.fontSi
 while(l>max&&fs>9.5){fs-=0.5;t.style.fontSize=fs+'px';l=t.getComputedTextLength()}
 if(l>max){t.setAttribute('textLength',max);t.setAttribute('lengthAdjust','spacingAndGlyphs')}}catch(e){}}
 const nm=i=>lang==='ar'?N[i].ar:N[i].en;
-const full=n=>n.id==='ANY3'?T().any3:(lang==='ar'?n.arFull:n.en);
+const full=n=>n.id==='ANY3'?T().any3:(lang==='ar'?n.arFull:n.enFull);
 const base=n=>n.ext?'':(n.el?(n.uni?' c-pink':' c-purple'):(n.uni?' c-coral':' c-gray'));
 const gdone=g=>[...done].filter(i=>N[i]&&N[i].grp===g);
 const canPick=n=>!n.grp||done.has(n.id)||gdone(n.grp).length<LIM[n.grp];
@@ -398,7 +397,7 @@ function up(i,s){N[i].pre.forEach(p=>{if(!s.has(p)){s.add(p);up(p,s)}});return s
 function dn(i,s){N[i].suc.forEach(p=>{if(!s.has(p)){s.add(p);dn(p,s)}});return s}
 function build(){
 while(root.firstChild)root.removeChild(root.firstChild);lab.length=0;edges=[];memo={};
-N={};[...SHARED,...MAJORS[majKey].rows].forEach(r=>{const t=r.type;N[r.id]={id:r.id,en:r.en,ar:r.ar,arFull:r.arFull,cr:r.cr,hrs:r.hrs,pre:r.pre.slice(),ext:t===2,el:t===1||t===5,uni:t>=3,low:t>=4,grp:r.grp,suc:[]}});
+N={};[...SHARED,...MAJORS[majKey].rows].forEach(r=>{const t=r.type;N[r.id]={id:r.id,en:r.en,enFull:r.enFull,ar:r.ar,arFull:r.arFull,cr:r.cr,hrs:r.hrs,pre:r.pre.slice(),ext:t===2,el:t===1||t===5,uni:t>=3,low:t>=4,grp:r.grp,suc:[]}});
 const ov=MAJORS[majKey].ov||{};Object.keys(ov).forEach(k=>{if(N[k])N[k].pre=ov[k].slice()});
 Object.values(N).forEach(n=>{n.pre=n.pre.filter(p=>N[p])});
 Object.values(N).forEach(n=>n.pre.forEach(p=>N[p].suc.push(n.id)));
@@ -466,7 +465,7 @@ else if(!canPick(n)){o=0.35;st=t.limit(gdone(n.grp).map(nm).join(', '),t.GN[n.gr
 else if(avail(n,S.t)){c=' c-blue';st=t.avail;av++}
 else{o=0.55;if(!n.ext){const m=n.pre.filter(p=>!done.has(p)).map(nm);st=(m.length?t.needs+m.join(', '):'')+(S.t<n.hrs?(m.length?'. ':'')+t.hrsNeed(n.hrs,S.t):'')}}}
 let f2=1;if(flt==='core'&&n.el)f2=0.2;if(flt==='el'&&!n.el&&!n.ext)f2=0.2;if(flt==='uni'&&!n.uni)f2=0.2;
-if(qq&&!(n.en.toLowerCase().includes(qq)||n.ar.includes(q)||n.id.toLowerCase().includes(qq)))f2*=0.25;fo[n.id]=f2;
+if(qq&&!(n.en.toLowerCase().includes(qq)||n.enFull.toLowerCase().includes(qq)||n.ar.includes(q)||n.arFull.includes(q)||n.id.toLowerCase().includes(qq)))f2*=0.25;fo[n.id]=f2;
 n.g.setAttribute('class','node'+c);n.g.style.opacity=1;n.g.classList.toggle('nonmatch',f2<1);n.g.classList.toggle('related',!!A&&(A.has(n.id)||B.has(n.id)||n.id===sel));n.tip.textContent=full(n)+' ('+n.id+')'+(st?'\n'+st:'');
 if(n.ext&&c===''){n.r.style.fill='var(--canvas)';n.r.style.stroke='var(--text-muted)'}else{n.r.style.fill='';n.r.style.stroke=''}
 if(dash)n.r.setAttribute('stroke-dasharray','4 3');else n.r.removeAttribute('stroke-dasharray');n.r.setAttribute('stroke-width',sw2)});
